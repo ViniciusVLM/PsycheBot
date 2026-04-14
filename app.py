@@ -32,7 +32,7 @@ def index():
         """
 
         try:
-            # USANDO O MODELO QUE VOCÊ ENCONTROU NO DIAGNÓSTICO
+
             model = genai.GenerativeModel('models/gemini-3-flash-preview')
             
             response = model.generate_content(prompt)
