@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Psicóloga - Gincana CIEE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Orientação de Carreira <span>IA</span></h1>
+            <p>Responda com sinceridade e receba um feedback profissional para sua evolução.</p>
+        </header>
+
+        <main>
+            <form method="POST" class="quiz-form">
+                <div class="form-group">
+                    <label for="p1">Como você lida com situações de pressão ou prazos curtos?</label>
+                    <textarea name="p1" id="p1" placeholder="Ex: Costumo organizar minhas tarefas por prioridade..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="p2">O que você considera mais importante para um bom trabalho em equipe?</label>
+                    <textarea name="p2" id="p2" placeholder="Ex: Comunicação clara e empatia entre os colegas..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Gerar Análise Profissional</button>
+            </form>
+
+            {% if resultado %}
+            <div class="result-card">
+                <h2>Parecer do Especialista</h2>
+                <div class="content">
+                    {{ resultado | safe }}
+                </div>
+                <button onclick="window.location.href='/'" class="btn-reset">Nova Consulta</button>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Gincana Dia do Jovem Trabalhador - CIEE</p>
+        </footer>
+    </div>
+</body>
+</html>

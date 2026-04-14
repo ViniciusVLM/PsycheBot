@@ -1,0 +1,30 @@
+# --- SEGURANÇA (O mais importante) ---
+# Ignora o arquivo que contém sua chave da API do Gemini
+.env
+
+# --- AMBIENTE VIRTUAL ---
+# Ignora a pasta venv porque ela é específica para o seu Windows
+# No servidor (Render), ele criará uma nova automaticamente
+venv/
+.venv/
+env/
+ENV/
+
+# --- PYTHON ---
+# Ignora arquivos compilados que o Python gera sozinho
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- VS CODE ---
+# Ignora as configurações locais do seu editor
+.vscode/
+
+# --- FLASK ---
+# Ignora a pasta de instância e arquivos de log
+instance/
+.webassets-cache
+*.log
+
+# --- BANCO DE DADOS (Caso você decida usar um local futuramente) ---
+*.sqlite3
