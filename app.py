@@ -33,15 +33,17 @@ def index():
         """
 
         try:
-            # Usando o modelo configurado
+            # Usando o nome estável para 2026
             model = genai.GenerativeModel('gemini-1.5-flash')
+            
             response = model.generate_content(prompt)
             
-            # 3. A MÁGICA: Transforma o Markdown da IA em HTML real
+            # Transforma o Markdown em HTML para o site ficar bonito
             analise_html = markdown.markdown(response.text)
             
         except Exception as e:
-            analise_html = f"<p style='color:red;'>Erro ao conectar com a IA: {e}</p>"
+            # Se der erro, ele vai te avisar de forma clara no site
+            analise_html = f"<div style='color:red;'>Erro na análise: {e}</div>"
 
     return render_template('index.html', resultado=analise_html)
 
