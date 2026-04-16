@@ -1,46 +1,49 @@
 import os
+import markdown  # Biblioteca para formatar a resposta da IA
 from flask import Flask, render_template, request
 import google.generativeai as genai
-from dotenv import load_dotenv  # Importa a função para carregar o .env
+from dotenv import load_dotenv
 
-# Carrega as variáveis do arquivo .env para o sistema
+# 1. Carrega as variáveis do arquivo .env (Segurança)
 load_dotenv()
 
 app = Flask(__name__)
 
-# Pega a chave que está guardada no ambiente
+# 2. Configuração da API do Google
 minha_chave = os.getenv("GEMINI_API_KEY")
-
-# Configura a IA usando a variável
 genai.configure(api_key=minha_chave)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    analise = None
+    analise_html = None  # Variável que levará o texto formatado para o site
+    
     if request.method == 'POST':
         p1 = request.form.get('p1')
         p2 = request.form.get('p2')
         
-        # O prompt que enviaremos para a IA
+        # O prompt estruturado para o "PsycheBot"
         prompt = f"""
         Aja como um psicólogo especializado em carreira. 
         Analise estas respostas de um jovem para uma gincana:
         1. Sobre pressão: {p1}
         2. Sobre trabalho em equipe: {p2}
         
-        Dê um feedback humano, motivador e profissional com um ponto de melhoria.
+        Dê um feedback humano, motivador e profissional. 
+        Use títulos e tópicos se necessário. Finalize com um ponto de melhoria prático.
         """
 
         try:
-
-            model = genai.GenerativeModel('models/gemini-3-flash-preview')
-            
+            # Usando o modelo configurado
+            model = genai.GenerativeModel('gemini-1.5-flash')
             response = model.generate_content(prompt)
-            analise = response.text
+            
+            # 3. A MÁGICA: Transforma o Markdown da IA em HTML real
+            analise_html = markdown.markdown(response.text)
+            
         except Exception as e:
-            analise = f"Erro ao conectar com a IA: {e}"
+            analise_html = f"<p style='color:red;'>Erro ao conectar com a IA: {e}</p>"
 
-    return render_template('index.html', resultado=analise)
+    return render_template('index.html', resultado=analise_html)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,46 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA Psicóloga - Gincana CIEE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>PsycheBot | IA de Carreira</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Orientação de Carreira <span>IA</span></h1>
-            <p>Responda com sinceridade e receba um feedback profissional para sua evolução.</p>
-        </header>
 
-        <main>
-            <form method="POST" class="quiz-form">
-                <div class="form-group">
-                    <label for="p1">Como você lida com situações de pressão ou prazos curtos?</label>
-                    <textarea name="p1" id="p1" placeholder="Ex: Costumo organizar minhas tarefas por prioridade..." required></textarea>
-                </div>
+    <header>
+        <h1>PsycheBot 🤖</h1>
+        <p>Análise de perfil para o Jovem Trabalhador</p>
+    </header>
 
-                <div class="form-group">
-                    <label for="p2">O que você considera mais importante para um bom trabalho em equipe?</label>
-                    <textarea name="p2" id="p2" placeholder="Ex: Comunicação clara e empatia entre os colegas..." required></textarea>
-                </div>
+    <main>
+        <form method="POST">
+            <div class="campo">
+                <label>Como você lida com situações de pressão ou prazos curtos?</label>
+                <textarea name="p1" required placeholder="Sua resposta..."></textarea>
+            </div>
 
-                <button type="submit" class="btn-submit">Gerar Análise Profissional</button>
-            </form>
+            <div class="campo">
+                <label>O que você considera mais importante para um bom trabalho em equipe?</label>
+                <textarea name="p2" required placeholder="Sua resposta..."></textarea>
+            </div>
 
-            {% if resultado %}
-            <div class="result-card">
+            <button type="submit">Gerar Parecer Profissional</button>
+        </form>
+
+        {% if resultado %}
+            <section class="resultado-container">
                 <h2>Parecer do Especialista</h2>
-                <div class="content">
+                <div class="texto-ia">
                     {{ resultado | safe }}
                 </div>
-                <button onclick="window.location.href='/'" class="btn-reset">Nova Consulta</button>
-            </div>
-            {% endif %}
-        </main>
+                <button onclick="window.location.href='/'" class="btn-novo">Nova Consulta</button>
+            </section>
+        {% endif %}
+    </main>
 
-        <footer>
-            <p>&copy; 2026 Gincana Dia do Jovem Trabalhador - CIEE</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; 2026 Gincana Dia do Jovem Trabalhador - CIEE</p>
+    </footer>
+
 </body>
 </html>

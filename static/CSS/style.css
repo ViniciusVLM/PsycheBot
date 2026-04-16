@@ -1,0 +1,66 @@
+/* Configurações Gerais */
+body {
+    background-color: #0f172a; /* Dark mode elegante */
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+header { text-align: center; margin-bottom: 30px; }
+h1 { color: #38bdf8; font-size: 2.5rem; }
+
+/* Formulário */
+form {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.campo { margin-bottom: 20px; }
+label { display: block; margin-bottom: 8px; font-weight: 500; color: #94a3b8; }
+
+textarea {
+    width: 100%;
+    height: 100px;
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    color: white;
+    padding: 12px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover { background: #0ea5e9; }
+
+/* Área do Resultado */
+.resultado-container {
+    margin-top: 40px;
+    background: #fff;
+    color: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 600px;
+    border-left: 8px solid #38bdf8;
+}
+
+.texto-ia h3 { color: #0284c7; margin-top: 15px; }
+.texto-ia strong { color: #0369a1; }
+.btn-novo { background: #64748b; margin-top: 20px; }
