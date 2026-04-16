@@ -19,16 +19,14 @@ def index():
     # ...
     try:
 
-        model = genai.GenerativeModel(
-            model_name='gemini-3.1-flash'
-        )
+        model = genai.GenerativeModel('gemini-1.5-flash')
         
 
         response = model.generate_content(prompt)
         analise_html = markdown.markdown(response.text)
         
     except Exception as e:
-
+        # Se o erro persistir, vamos capturar exatamente o que a API diz
         analise_html = f"<div class='erro'>Erro técnico: {e}</div>"
 
     return render_template('index.html', resultado=analise_html)
