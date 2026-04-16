@@ -51,19 +51,19 @@ def index():
         Finalize com um ponto de melhoria prático.
         """
 
-    try:
+        try:
 
-        model = genai.GenerativeModel('gemini-3-flash-preview')
-        
+            model = genai.GenerativeModel('gemini-3-flash-preview')
+            
 
-        response = model.generate_content(prompt)
-        
-        analise_html = markdown.markdown(response.text)
-    except Exception as e:
+            response = model.generate_content(prompt)
+            
+            analise_html = markdown.markdown(response.text)
+        except Exception as e:
 
-        analise_html = f"Erro na conexão com Gemini 3: {e}"
+            analise_html = f"Erro na conexão com Gemini 3: {e}"
 
-    return render_template('index.html', resultado=analise_html)
+        return render_template('index.html', resultado=analise_html)
 
 if __name__ == '__main__':
     app.run(debug=True)
