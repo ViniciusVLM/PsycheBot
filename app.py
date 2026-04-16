@@ -17,35 +17,23 @@ def index():
     analise_html = None
     
     if request.method == 'POST':
-        # 1. Capturando exatamente o que está no seu HTML
-        p1 = request.form.get('p1')
-        p2 = request.form.get('p2')
-        q1 = request.form.get('q1')
-        q2 = request.form.get('q2')
-        q3 = request.form.get('q3')
-        trajetoria = request.form.get('trajetoria')
+        # 1. Pegando os dados do formulário
+        p1 = request.form.get('p1', '')
+        p2 = request.form.get('p2', '')
+        q1 = request.form.get('q1', 'N/A')
+        q2 = request.form.get('q2', 'N/A')
+        q3 = request.form.get('q3', 'N/A')
+        trajetoria = request.form.get('trajetoria', '')
 
-        # 2. Montando o prompt com as variáveis corretas
+        # 2. Criando o prompt (SÓ EXISTE AQUI DENTRO)
         prompt = f"""
-        Aja como um psicólogo especializado em carreira. 
-        Analise estas respostas de um jovem para uma gincana:
+        Analise este perfil profissional:
+        - Pressão: {p1}
+        - Equipe: {p2}
+        - Escolhas (Alternativas): {q1}, {q2}, {q3}
+        - Relato Pessoal: {trajetoria}
         
-        PERGUNTAS ABERTAS:
-        - Sobre pressão: {p1}
-        - Sobre trabalho em equipe: {p2}
-        
-        DADOS ESTRUTURADOS (Alternativas):
-        - Reação ao erro: {q1}
-        - Reação à crítica: {q2}
-        - Autopercepção: {q3}
-
-        RELATO PESSOAL:
-        "{trajetoria}"
-
-        OBJETIVO:
-        Crie um "Parecer do Especialista" motivador e profissional. 
-        Analise a consistência entre as escolhas e o texto.
-        Use títulos (###) e negrito (**) na resposta.
+        Dê um parecer motivador e profissional em Markdown.
         """
 
         try:
