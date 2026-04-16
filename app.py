@@ -31,18 +31,17 @@ def index():
         Finalize com um ponto de melhoria prático.
         """
 
-        try:
+    try:
 
-            model = genai.GenerativeModel('gemini-1.5-flash')
-            
+        model = genai.GenerativeModel('gemini-3-flash-preview')
+        
 
-            response = model.generate_content(prompt)
-            
-
-            analise_html = markdown.markdown(response.text)
-            
-        except Exception as e:
-            analise_html = f"Erro técnico: {e}"
+        response = model.generate_content(prompt)
+        
+        analise_html = markdown.markdown(response.text)
+        
+    except Exception as e:
+        analise_html = f"Erro ao conectar com o modelo 3-flash: {e}"
 
     return render_template('index.html', resultado=analise_html)
 
