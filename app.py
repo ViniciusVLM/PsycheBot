@@ -33,17 +33,17 @@ def index():
         """
 
         try:
-            # Usando o nome estável para 2026
+
             model = genai.GenerativeModel('gemini-3.1-flash')
             
             response = model.generate_content(prompt)
             
-            # Transforma o Markdown em HTML para o site ficar bonito
+
             analise_html = markdown.markdown(response.text)
             
         except Exception as e:
-            # Se der erro, ele vai te avisar de forma clara no site
-            analise_html = f"<div style='color:red;'>Erro na análise: {e}</div>"
+
+            analise_html = f"<div class='erro'>Ocorreu um erro na conexão 3.1: {e}</div>"
 
     return render_template('index.html', resultado=analise_html)
 
