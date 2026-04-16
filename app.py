@@ -21,7 +21,7 @@ def index():
         p2 = request.form.get('p2')
         
 
-        prompt_ia = f"""
+        prompt = f"""
         Aja como um psicólogo especializado em carreira. 
         Analise estas respostas de um jovem para uma gincana:
         1. Sobre pressão: {p1}
@@ -36,7 +36,7 @@ def index():
             model = genai.GenerativeModel('gemini-1.5-flash')
             
 
-            response = model.generate_content(prompt_ia)
+            response = model.generate_content(prompt)
             
 
             analise_html = markdown.markdown(response.text)
