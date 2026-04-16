@@ -17,38 +17,35 @@ def index():
     analise_html = None
     
     if request.method == 'POST':
+        # 1. Capturando exatamente o que está no seu HTML
         p1 = request.form.get('p1')
         p2 = request.form.get('p2')
         q1 = request.form.get('q1')
         q2 = request.form.get('q2')
         q3 = request.form.get('q3')
-
         trajetoria = request.form.get('trajetoria')
 
+        # 2. Montando o prompt com as variáveis corretas
         prompt = f"""
         Aja como um psicólogo especializado em carreira. 
         Analise estas respostas de um jovem para uma gincana:
-        1. Sobre pressão: {p1}
-        2. Sobre trabalho em equipe: {p2}
         
-        DADOS ESTRUTURADOS (Escolhas do candidato):
-        1. Reação ao erro: {resp1}
-        2. Reação à crítica: {resp2}
-        3. Autopercepção de qualidades: {resp3}
+        PERGUNTAS ABERTAS:
+        - Sobre pressão: {p1}
+        - Sobre trabalho em equipe: {p2}
+        
+        DADOS ESTRUTURADOS (Alternativas):
+        - Reação ao erro: {q1}
+        - Reação à crítica: {q2}
+        - Autopercepção: {q3}
 
-        RELATO PESSOAL (Narrativa do candidato):
+        RELATO PESSOAL:
         "{trajetoria}"
 
         OBJETIVO:
-        Crie um "Parecer do Especialista" que seja:
-        - Motivador, mas realista.
-        - Analise se as escolhas das alternativas batem com o que ele escreveu no texto.
-        - Destaque as qualidades mencionadas.
-        - Ofereça uma estratégia prática para ele lidar com os pontos que deseja aprimorar.
-        - Use títulos (###) e negrito (**) para organizar a resposta.
-
-        Dê um feedback humano, motivador e profissional. 
-        Finalize com um ponto de melhoria prático.
+        Crie um "Parecer do Especialista" motivador e profissional. 
+        Analise a consistência entre as escolhas e o texto.
+        Use títulos (###) e negrito (**) na resposta.
         """
 
         try:
