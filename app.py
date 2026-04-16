@@ -39,9 +39,9 @@ def index():
         response = model.generate_content(prompt)
         
         analise_html = markdown.markdown(response.text)
-        
     except Exception as e:
-        analise_html = f"Erro ao conectar com o modelo 3-flash: {e}"
+
+        analise_html = f"Erro na conexão com Gemini 3: {e}"
 
     return render_template('index.html', resultado=analise_html)
 
