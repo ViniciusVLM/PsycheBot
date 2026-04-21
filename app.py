@@ -1,4 +1,5 @@
 import os
+from xml.parsers.expat import model
 import markdown
 from flask import Flask, render_template, request
 import google.generativeai as genai
@@ -17,7 +18,7 @@ def index():
     analise_html = None
     
     if request.method == 'POST':
-        # 1. Pegando os dados do formulário
+        # Tudo o que acontece APÓS o clique do botão fica aqui dentro
         p1 = request.form.get('p1', '')
         p2 = request.form.get('p2', '')
         q1 = request.form.get('q1', 'N/A')
@@ -25,30 +26,16 @@ def index():
         q3 = request.form.get('q3', 'N/A')
         trajetoria = request.form.get('trajetoria', '')
 
-        # 2. Criando o prompt (SÓ EXISTE AQUI DENTRO)
-        prompt = f"""
-        Analise este perfil profissional:
-        - Pressão: {p1}
-        - Equipe: {p2}
-        - Escolhas (Alternativas): {q1}, {q2}, {q3}
-        - Relato Pessoal: {trajetoria}
-        
-        Dê um parecer motivador e profissional em Markdown.
-        """
-
+        prompt = f"Analise: {p1}, {p2}, {q1}, {q2}, {q3}. Texto: {trajetoria}"
         try:
 
             model = genai.GenerativeModel('gemini-3-flash-preview')
             
-
             response = model.generate_content(prompt)
-            
             analise_html = markdown.markdown(response.text)
         except Exception as e:
+            analise_html = f"Erro na IA: {e}"
 
-            analise_html = f"Erro na conexão com Gemini 3: {e}"
-
-        return render_template('index.html', resultado=analise_html)
-
+    return render_template('index.html', resultado=analise_html)
 if __name__ == '__main__':
     app.run(debug=True)
